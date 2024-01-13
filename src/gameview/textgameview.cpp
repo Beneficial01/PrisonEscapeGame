@@ -98,6 +98,7 @@ void TextGameView::clearMainWindow()
 {
 
     lineEdit.reset();
+    lineEdit = nullptr;
     tileView->clearView();
     hpView->clearView();
     protView->clearView();
@@ -110,6 +111,7 @@ void TextGameView::clearMainWindow()
     energyLabel.reset();
     energyValueLabel.reset();
     availableCommandsTextLabel.reset();
+
 }
 
 void TextGameView::setupBasicCommands()
@@ -173,13 +175,9 @@ void CommandLineEdit::keyPressEvent(QKeyEvent *event)
     case Qt::Key_Return:
     case Qt::Key_Enter:
         ret = commandTrie->findFirstMatch(this->text().toStdString(), true);
-
-        if(ret.second == 1 || ret.second == 3){
-            if(ret.first != "switch view") this->setText("");
-        } else{
+        if(ret.second != 1 && ret.second != 3){
             ret = commandTrie->findFirstMatch("help", true);
-            this->setText("");
-        }
+         }
         break;
     case Qt::Key_Right:
         ret = commandTrie->findFirstMatch(this->text().toStdString(), false);

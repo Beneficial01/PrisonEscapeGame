@@ -146,6 +146,12 @@ void GameController::initializeView()
     enemyController->setEnemyView(gameView->getEnemyView());
     hpController->setHpView(gameView->getHpView());
 
+    tileController->update(row, col,false);
+    hpController->refreshAll();
+    protController->refreshAll();
+    enemyController->refreshAll();
+    protController->update(row, col);
+
 }
 
 
